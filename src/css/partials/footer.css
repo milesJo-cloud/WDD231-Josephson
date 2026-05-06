@@ -1,0 +1,37 @@
+/* =====================
+   Footer
+   ===================== */
+
+#park-footer {
+  background-color: var(--bs-pampas);
+  padding: 2em 1em;
+  margin-top: 2em;
+  font-size: 0.9rem;
+}
+
+.footer-info h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  margin: 0 0 1em;
+}
+
+.footer-info p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 1em;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.footer-info strong {
+  display: block;
+  font-weight: bold;
+}
+
+.footer-info a:link,
+.footer-info a:visited {
+  color: var(--bs-body-color);
+  text-decoration: none;
+}

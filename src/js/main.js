@@ -1,24 +1,49 @@
-import { getParkData } from "./parkService.mjs";
+// import { getParkData, parkInfoLinks } from "./parkService.mjs";
+// import setHeaderFooter from "./setHeaderFooter.mjs";
+// import { mediaCardTemplate } from "./templates.mjs";
 
-const parkData = getParkData();
+// const parkData = getParkData();
 
-function parkInfoTemplate(info) {
-    return `
-    <a href="/" class="hero-banner__title">${info.fullName}</a>
-    <p class="park-name__subtitle">
-    <span>${info.designation}</span>
-    <span>${info.states}</span>
-    </p>
-    `;
+// function setParkIntro(park) {
+//   document.querySelector(".intro").innerHTML = `
+//     <h2>${park.fullName}</h2>
+//     <p>${park.description}</p>
+//   `;
+// }
+
+// function setParkInfoLinks(infoLinks) {
+//   const cards = infoLinks.map((link) => mediaCardTemplate(link)).join("");
+//   document.querySelector(".info").innerHTML = cards;
+// }
+
+// setHeaderFooter(parkData);
+// setParkIntro(parkData);
+// setParkInfoLinks(parkInfoLinks);
+
+import { getParkData, getInfoLinks } from "./parkService.mjs";
+import setHeaderFooter from "./setHeaderFooter.mjs";
+import { mediaCardTemplate } from "./templates.mjs";
+
+function setParkIntro(park) {
+  document.querySelector(".intro").innerHTML = `
+    <h2>${park.fullName}</h2>
+    <p>${park.description}</p>
+  `;
 }
 
-const disclaimer = document.querySelector(".disclaimer > a");
-disclaimer.href = parkData.url;
-disclaimer.innerHTML = parkData.fullName;
+function setParkInfoLinks(links) {
+  const cards = links.map((link) => mediaCardTemplate(link)).join("");
+  document.querySelector(".info").innerHTML = cards;
+}
 
-document.querySelector(".hero-banner > img").alt = parkData.fullName;
+// Step 03: The init function to coordinate the async data
+async function init() {
+  const parkData = await getParkData("yell"); // Fetch data
+  const links = getInfoLinks(parkData.images); // Get links with API images
 
-document.querySelector(".hero-banner > img").src = parkData.images[0].url;
-document.querySelector(".hero-banner > img").alt = parkData.images[0].altText;
+  setHeaderFooter(parkData);
+  setParkIntro(parkData);
+  setParkInfoLinks(links);
+}
 
-document.querySelector(".hero-banner__content").innerHTML = parkInfoTemplate(parkData);
+init();
